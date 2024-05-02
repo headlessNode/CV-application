@@ -1,0 +1,14 @@
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1280px;
+    min-width: 750px;
+}
+
+.main-grid .education .education-form {
+    display: none;
+}
+
+.main-grid .experience .experience-form {
+    display: none;
+}
