@@ -1,6 +1,37 @@
+import { useState } from 'react'
 import './App.css'
 
-function Cv() {}
+function CvHeader({ name, email, number, address }) {
+    return (
+        <div className="cv-header">
+            <h1>{name}</h1>
+            <div className="deets">
+                <div className="email">
+                    <p>{email}</p>
+                </div>
+                <div className="number">
+                    <p>{number}</p>
+                </div>
+                <div className="address">
+                    <p>{address}</p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+function Cv({ name, email, number, address }) {
+    return (
+        <div className="cv">
+            <CvHeader
+                name={name}
+                email={email}
+                number={number}
+                address={address}
+            />
+        </div>
+    )
+}
 
 function ExpereinceForm() {
     function addExperience(e) {
@@ -164,7 +195,27 @@ function Education() {
     )
 }
 
-function PersonalDeets() {
+function Summary() {
+    return (
+        <form className="summary">
+            <label>
+                <h1>Summary</h1>
+            </label>
+            <textarea className="summary-txt" cols={30} rows={4}></textarea>
+        </form>
+    )
+}
+
+function PersonalDeets({
+    name,
+    handleNameChange,
+    email,
+    handleEmailChange,
+    number,
+    handleNumberChange,
+    address,
+    handleAddressChange,
+}) {
     return (
         <form className="personal-deets">
             <label>
@@ -173,27 +224,62 @@ function PersonalDeets() {
             <label>
                 <h4>Full name</h4>
             </label>
-            <input type="text" />
+            <input
+                type="text"
+                value={name}
+                onChange={(e) => handleNameChange(e)}
+            />
             <label>
                 <h4>Email</h4>
             </label>
-            <input type="email" />
+            <input
+                type="email"
+                value={email}
+                onChange={(e) => handleEmailChange(e)}
+            />
             <label>
                 <h4>Phone number</h4>
             </label>
-            <input type="number" name="" id="" />
+            <input
+                type="text"
+                value={number}
+                onChange={(e) => handleNumberChange(e)}
+            />
             <label>
                 <h4>Address</h4>
             </label>
-            <input type="text" />
+            <input
+                type="text"
+                value={address}
+                onChange={(e) => handleAddressChange(e)}
+            />
         </form>
     )
 }
 
-function InfoForm() {
+function InfoForm({
+    name,
+    handleNameChange,
+    email,
+    handleEmailChange,
+    number,
+    handleNumberChange,
+    address,
+    handleAddressChange,
+}) {
     return (
-        <div>
-            <PersonalDeets />
+        <div className="info-form">
+            <PersonalDeets
+                name={name}
+                handleChange={handleNameChange}
+                email={email}
+                handleEmailChange={handleEmailChange}
+                number={number}
+                handleNumberChange={handleNumberChange}
+                address={address}
+                handleAddressChange={handleAddressChange}
+            />
+            <Summary />
             <Education />
             <Experience />
         </div>
@@ -201,9 +287,40 @@ function InfoForm() {
 }
 
 function MainGrid() {
+    let [name, setName] = useState('John Doe')
+    let [email, setEmail] = useState('jDoe@example.com')
+    let [number, setNumber] = useState('+123-456-789')
+    let [address, setAddress] = useState('Gotham, DC')
+
+    function handleNameChange(e) {
+        setName(e.target.value)
+    }
+
+    function handleEmailChange(e) {
+        setEmail(e.target.value)
+    }
+
+    function handleNumberChange(e) {
+        setNumber(e.target.value)
+    }
+
+    function handleAddressChange(e) {
+        setAddress(e.target.value)
+    }
+
     return (
         <div className="main-grid">
-            <InfoForm />
+            <InfoForm
+                name={name}
+                handleNameChange={handleNameChange}
+                email={email}
+                handleEmailChange={handleEmailChange}
+                number={number}
+                handleNumberChange={handleNumberChange}
+                address={address}
+                handleAddressChange={handleAddressChange}
+            />
+            <Cv name={name} email={email} number={number} address={address} />
         </div>
     )
 }
