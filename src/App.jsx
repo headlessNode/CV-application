@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import './App.css'
 
 function CvHeader({ name, email, number, address }) {
@@ -29,7 +30,29 @@ function CvSummary({ summary }) {
     )
 }
 
-function Cv({ name, email, number, address, summary }) {
+function CvEducation({ education }) {
+    return (
+        <div className="cv-education">
+            <h2>Education</h2>
+            {education.map((ed) => {
+                return (
+                    <div className="ed-deets" key={uuidv4()}>
+                        <div className="date-loc">
+                            <p>{`${ed.startDate} to ${ed.endDate}`}</p>
+                            <p>{`${ed.city}`}</p>
+                        </div>
+                        <div className="school">
+                            <h4>{`${ed.school}`}</h4>
+                            <p>{`${ed.degree}`}</p>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
+
+function Cv({ name, email, number, address, summary, education }) {
     return (
         <div className="cv">
             <CvHeader
@@ -39,6 +62,7 @@ function Cv({ name, email, number, address, summary }) {
                 address={address}
             />
             <CvSummary summary={summary} />
+            <CvEducation education={education} />
         </div>
     )
 }
@@ -125,27 +149,35 @@ function Experience() {
     )
 }
 
-function EducationForm() {
+function EducationForm({ education, handleEducationChange }) {
     function addEducation(e) {
         const eduContainer = e.target.parentElement.parentElement
         const eduDeets = eduContainer.querySelector('.education-deets')
         const addEdu = eduContainer.querySelector('.add-edu')
-        const form = eduContainer.querySelector('.education-form')
-
-        form.style.display = 'none'
+        const formContainer = eduContainer.querySelector('.education-form')
+        const form = formContainer.querySelector('form')
+        formContainer.style.display = 'none'
         eduDeets.style.display = 'block'
         addEdu.style.display = 'block'
+        const formData = new FormData(form)
+        const formDataObject = {}
+        formData.forEach((value, key) => {
+            formDataObject[key] = value
+        })
+        handleEducationChange(formDataObject)
+        form.reset()
     }
 
     function cancelEduAddition(e) {
         const eduContainer = e.target.parentElement.parentElement
         const eduDeets = eduContainer.querySelector('.education-deets')
         const addEdu = eduContainer.querySelector('.add-edu')
-        const form = eduContainer.querySelector('.education-form')
-
-        form.style.display = 'none'
+        const formContainer = eduContainer.querySelector('.education-form')
+        const form = formContainer.querySelector('form')
+        formContainer.style.display = 'none'
         eduDeets.style.display = 'block'
         addEdu.style.display = 'block'
+        form.reset()
     }
 
     return (
@@ -154,23 +186,23 @@ function EducationForm() {
                 <label>
                     <h4>School</h4>
                 </label>
-                <input type="text" />
+                <input type="text" name="school" autoComplete="off" />
                 <label>
                     <h4>Degree</h4>
                 </label>
-                <input type="text" />
+                <input type="text" name="degree" autoComplete="off" />
                 <label>
                     <h4>Start Date</h4>
                 </label>
-                <input type="date" />
+                <input type="month" name="startDate" autoComplete="off" />
                 <label>
                     <h4>End Date</h4>
                 </label>
-                <input type="date" />
+                <input type="month" name="endDate" autoComplete="off" />
                 <label>
                     <h4>Location</h4>
                 </label>
-                <input type="text" />
+                <input type="text" name="location" autoComplete="off" />
             </form>
             <button className="add-edu" onClick={addEducation}>
                 Add
@@ -182,7 +214,7 @@ function EducationForm() {
     )
 }
 
-function Education() {
+function Education({ education, handleEducationChange }) {
     function showForm(e) {
         const eduContainer = e.target.parentElement.parentElement
         const eduDeets = eduContainer.querySelector('.education-deets')
@@ -200,7 +232,10 @@ function Education() {
             <div className="add-edu">
                 <button onClick={showForm}>+ Education</button>
             </div>
-            <EducationForm />
+            <EducationForm
+                education={education}
+                handleEducationChange={handleEducationChange}
+            />
         </div>
     )
 }
@@ -284,6 +319,8 @@ function InfoForm({
     handleAddressChange,
     summary,
     handleSummaryChange,
+    education,
+    handleEducationChange,
 }) {
     return (
         <div className="info-form">
@@ -301,7 +338,10 @@ function InfoForm({
                 summary={summary}
                 handleSummaryChange={handleSummaryChange}
             />
-            <Education />
+            <Education
+                education={education}
+                handleEducationChange={handleEducationChange}
+            />
             <Experience />
         </div>
     )
@@ -315,6 +355,15 @@ function MainGrid() {
     let [summary, setSummary] = useState(
         'Brief paragraph on skills and expereince.'
     )
+    let [education, setEducation] = useState([
+        {
+            school: 'Gotham State University',
+            degree: 'Bachelors in Data Science',
+            startDate: '2017-09',
+            endDate: '2021-07',
+            city: 'Gotham, DC',
+        },
+    ])
 
     function handleNameChange(e) {
         setName(e.target.value)
@@ -336,6 +385,10 @@ function MainGrid() {
         setSummary(e.target.value)
     }
 
+    function handleEducationChange(eduDeetsObject) {
+        setEducation([...education, eduDeetsObject])
+    }
+
     return (
         <div className="main-grid">
             <InfoForm
@@ -349,6 +402,8 @@ function MainGrid() {
                 handleAddressChange={handleAddressChange}
                 summary={summary}
                 handleSummaryChange={handleSummaryChange}
+                education={education}
+                handleEducationChange={handleEducationChange}
             />
             <Cv
                 name={name}
@@ -356,6 +411,7 @@ function MainGrid() {
                 number={number}
                 address={address}
                 summary={summary}
+                education={education}
             />
         </div>
     )
