@@ -20,7 +20,16 @@ function CvHeader({ name, email, number, address }) {
     )
 }
 
-function Cv({ name, email, number, address }) {
+function CvSummary({ summary }) {
+    return (
+        <div className="cv-summary">
+            <h2>Summary</h2>
+            <p>{summary}</p>
+        </div>
+    )
+}
+
+function Cv({ name, email, number, address, summary }) {
     return (
         <div className="cv">
             <CvHeader
@@ -29,6 +38,7 @@ function Cv({ name, email, number, address }) {
                 number={number}
                 address={address}
             />
+            <CvSummary summary={summary} />
         </div>
     )
 }
@@ -195,13 +205,19 @@ function Education() {
     )
 }
 
-function Summary() {
+function Summary({ summary, handleSummaryChange }) {
     return (
         <form className="summary">
             <label>
                 <h1>Summary</h1>
             </label>
-            <textarea className="summary-txt" cols={30} rows={4}></textarea>
+            <textarea
+                className="summary-txt"
+                value={summary}
+                onChange={(e) => handleSummaryChange(e)}
+                cols={30}
+                rows={4}
+            ></textarea>
         </form>
     )
 }
@@ -266,6 +282,8 @@ function InfoForm({
     handleNumberChange,
     address,
     handleAddressChange,
+    summary,
+    handleSummaryChange,
 }) {
     return (
         <div className="info-form">
@@ -279,7 +297,10 @@ function InfoForm({
                 address={address}
                 handleAddressChange={handleAddressChange}
             />
-            <Summary />
+            <Summary
+                summary={summary}
+                handleSummaryChange={handleSummaryChange}
+            />
             <Education />
             <Experience />
         </div>
@@ -291,6 +312,9 @@ function MainGrid() {
     let [email, setEmail] = useState('jDoe@example.com')
     let [number, setNumber] = useState('+123-456-789')
     let [address, setAddress] = useState('Gotham, DC')
+    let [summary, setSummary] = useState(
+        'Brief paragraph on skills and expereince.'
+    )
 
     function handleNameChange(e) {
         setName(e.target.value)
@@ -308,6 +332,10 @@ function MainGrid() {
         setAddress(e.target.value)
     }
 
+    function handleSummaryChange(e) {
+        setSummary(e.target.value)
+    }
+
     return (
         <div className="main-grid">
             <InfoForm
@@ -319,8 +347,16 @@ function MainGrid() {
                 handleNumberChange={handleNumberChange}
                 address={address}
                 handleAddressChange={handleAddressChange}
+                summary={summary}
+                handleSummaryChange={handleSummaryChange}
             />
-            <Cv name={name} email={email} number={number} address={address} />
+            <Cv
+                name={name}
+                email={email}
+                number={number}
+                address={address}
+                summary={summary}
+            />
         </div>
     )
 }
