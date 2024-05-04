@@ -230,7 +230,13 @@ function Education({ education, handleEducationChange }) {
             <h1>Education</h1>
             <div className="education-deets">
                 {education.map((edu) => (
-                    <h4 key={uuidv4()}>{edu.school}</h4>
+                    <div className={edu.school} key={uuidv4()}>
+                        <h4>{edu.school}</h4>
+                        <button
+                            className="fa-solid fa-trash"
+                            style={{ color: '#ff0000' }}
+                        ></button>
+                    </div>
                 ))}
             </div>
             <div className="add-edu">
