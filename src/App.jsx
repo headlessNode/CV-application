@@ -228,7 +228,11 @@ function Education({ education, handleEducationChange }) {
     return (
         <div className="education">
             <h1>Education</h1>
-            <div className="education-deets"></div>
+            <div className="education-deets">
+                {education.map((edu) => (
+                    <h4 key={uuidv4()}>{edu.school}</h4>
+                ))}
+            </div>
             <div className="add-edu">
                 <button onClick={showForm}>+ Education</button>
             </div>
