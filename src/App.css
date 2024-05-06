@@ -1,17 +1,140 @@
 .main-grid {
     max-width: 1280px;
     min-width: 750px;
+    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.5fr 2fr;
     gap: 20px;
+}
+
+.main-grid .info-form {
+    display: grid;
+    gap: 30px;
 }
 
 .main-grid .cv {
     min-height: 100vh;
 }
 
-.main-grid .education .education-form {
+.main-grid .info-form .personal-deets {
+    background-color: var(--info-form-color);
+    border-radius: 20px;
+    box-shadow: 2px 2px 8px 3px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: grid;
+    gap: 15px;
+    > * {
+        display: grid;
+        gap: 10px;
+    }
+}
+
+.main-grid .info-form .skills {
+    background-color: var(--info-form-color);
+    border-radius: 20px;
+    box-shadow: 2px 2px 8px 3px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: grid;
+    gap: 15px;
+    > ul {
+        list-style-type: none;
+        padding: none;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.main-grid .info-form .summary {
+    background-color: var(--info-form-color);
+    border-radius: 20px;
+    box-shadow: 2px 2px 8px 3px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: grid;
+    gap: 15px;
+    > .summary-txt {
+        resize: none;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        background: var(--main-bg-color);
+    }
+}
+
+.main-grid .info-form .education {
+    background: var(--main-bg-color);
+    box-shadow: 2px 2px 8px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    display: grid;
+    gap: 8px;
+    > * {
+        background: var(--info-form-color);
+    }
+}
+
+.main-grid .info-form .education .education-deets > * {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    > button {
+        background: none;
+        border: none;
+    }
+}
+
+.main-grid .info-form .education .main-btn {
+    padding: 20px;
+    border: none;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-grid .info-form .education .add-edu {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    > button {
+        padding: 15px 25px 15px 25px;
+        border: none;
+        border-radius: 15px;
+        background: var(--main-bg-color);
+    }
+}
+
+.main-grid .info-form .education .education-deets.hidden {
     display: none;
+}
+
+.main-grid .info-form .education .education-deets.visible {
+    display: grid;
+    gap: 10px;
+}
+
+.main-grid .info-form .education .add-edu.hidden {
+    display: none;
+}
+
+.main-grid .info-form .education .add-edu.visible {
+    display: flex;
+}
+
+.main-grid .info-form .education.deets-hidden .main-btn {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.main-grid .education .education-form.hidden {
+    display: none;
+}
+
+.main-grid .education .education-form.visible {
+    display: grid;
 }
 
 .main-grid .experience .experience-form {

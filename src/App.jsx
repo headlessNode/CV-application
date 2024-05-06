@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Children, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import './App.css'
 
@@ -305,9 +305,12 @@ function EducationForm({ handleAddEducation }) {
         const addEdu = eduContainer.querySelector('.add-edu')
         const formContainer = eduContainer.querySelector('.education-form')
         const form = formContainer.querySelector('form')
-        formContainer.style.display = 'none'
-        eduDeets.style.display = 'block'
-        addEdu.style.display = 'block'
+        formContainer.classList.remove('visible')
+        formContainer.classList.add('hidden')
+        eduDeets.classList.add('visible')
+        eduDeets.classList.remove('hidden')
+        addEdu.classList.add('visible')
+        addEdu.classList.remove('hidden')
         const formData = new FormData(form)
         const formDataObject = {}
         formData.forEach((value, key) => {
@@ -323,14 +326,17 @@ function EducationForm({ handleAddEducation }) {
         const addEdu = eduContainer.querySelector('.add-edu')
         const formContainer = eduContainer.querySelector('.education-form')
         const form = formContainer.querySelector('form')
-        formContainer.style.display = 'none'
-        eduDeets.style.display = 'block'
-        addEdu.style.display = 'block'
+        formContainer.classList.remove('visible')
+        formContainer.classList.add('hidden')
+        eduDeets.classList.remove('hidden')
+        eduDeets.classList.add('visible')
+        addEdu.classList.remove('hidden')
+        addEdu.classList.add('visible')
         form.reset()
     }
 
     return (
-        <div className="education-form">
+        <div className="education-form hidden">
             <form>
                 <label>
                     <h4>School</h4>
@@ -351,9 +357,9 @@ function EducationForm({ handleAddEducation }) {
                 <label>
                     <h4>Location</h4>
                 </label>
-                <input type="text" name="location" autoComplete="off" />
+                <input type="text" name="city" autoComplete="off" />
             </form>
-            <button className="add-edu" onClick={addEducation}>
+            <button className="add-edu-deets" onClick={addEducation}>
                 Add
             </button>
             <button className="cancel" onClick={cancelEduAddition}>
@@ -371,32 +377,50 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
         const eduDeets = eduContainer.querySelector('.education-deets')
         const addEdu = eduContainer.querySelector('.add-edu')
         const form = eduContainer.querySelector('.education-form')
-        eduDeets.style.display = 'none'
-        addEdu.style.display = 'none'
-        form.style.display = 'block'
+        eduContainer.classList.remove('deets-hidden')
+        eduDeets.classList.remove('visible')
+        eduDeets.classList.add('hidden')
+        addEdu.classList.remove('visible')
+        addEdu.classList.add('hidden')
+        form.classList.add('visible')
+        form.classList.remove('hidden')
     }
 
     function showEdDeets() {
-        const edDeets = document.querySelector('.education-deets')
-        edDeets.style.display = 'block'
+        const educationContainer = document.querySelector('.education')
+        const educationDeets = document.querySelector('.education-deets')
+        const addEduBtn = document.querySelector('.add-edu')
+        educationContainer.classList.remove('deets-hidden')
+        educationDeets.classList.remove('hidden')
+        educationDeets.classList.add('visible')
+        addEduBtn.classList.remove('hidden')
+        addEduBtn.classList.add('visible')
         edDeetsVisible = true
     }
 
     function hideEdDeets() {
-        const edDeets = document.querySelector('.education-deets')
-        edDeets.style.display = 'none'
+        const educationContainer = document.querySelector('.education')
+        const children = educationContainer.children
+        educationContainer.classList.add('deets-hidden')
+        for (const child of children) {
+            if (child.classList.contains('visible')) {
+                child.classList.add('hidden')
+                child.classList.remove('visible')
+            }
+        }
         edDeetsVisible = false
     }
 
     return (
-        <div className="education">
+        <div className="education deets-hidden">
             <button
+                className="main-btn"
                 onClick={() => (edDeetsVisible ? hideEdDeets() : showEdDeets())}
             >
                 <h1>Education</h1>
                 <i className="fa-solid fa-chevron-up"></i>
             </button>
-            <div className="education-deets" style={{ display: 'none' }}>
+            <div className="education-deets hidden">
                 {education.map((edu, idx) => (
                     <div className={edu.school} key={uuidv4()}>
                         <h4>{edu.school}</h4>
@@ -408,7 +432,7 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
                     </div>
                 ))}
             </div>
-            <div className="add-edu">
+            <div className="add-edu hidden">
                 <button onClick={showForm}>+ Education</button>
             </div>
             <EducationForm handleAddEducation={handleAddEducation} />
@@ -533,38 +557,46 @@ function PersonalDeets({
             <label>
                 <h1>Personal Details</h1>
             </label>
-            <label>
-                <h4>Full name</h4>
-            </label>
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => handleNameChange(e)}
-            />
-            <label>
-                <h4>Email</h4>
-            </label>
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => handleEmailChange(e)}
-            />
-            <label>
-                <h4>Phone number</h4>
-            </label>
-            <input
-                type="text"
-                value={number}
-                onChange={(e) => handleNumberChange(e)}
-            />
-            <label>
-                <h4>Address</h4>
-            </label>
-            <input
-                type="text"
-                value={address}
-                onChange={(e) => handleAddressChange(e)}
-            />
+            <div className="name">
+                <label>
+                    <h4>Full name</h4>
+                </label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => handleNameChange(e)}
+                />
+            </div>
+            <div className="email">
+                <label>
+                    <h4>Email</h4>
+                </label>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => handleEmailChange(e)}
+                />
+            </div>
+            <div className="number">
+                <label>
+                    <h4>Phone number</h4>
+                </label>
+                <input
+                    type="text"
+                    value={number}
+                    onChange={(e) => handleNumberChange(e)}
+                />
+            </div>
+            <div className="address">
+                <label>
+                    <h4>Address</h4>
+                </label>
+                <input
+                    type="text"
+                    value={address}
+                    onChange={(e) => handleAddressChange(e)}
+                />
+            </div>
         </form>
     )
 }
@@ -594,7 +626,6 @@ function InfoForm({
     handleSkillSeven,
     skillEight,
     handleSkillEight,
-
     summary,
     handleSummaryChange,
     education,
@@ -608,7 +639,7 @@ function InfoForm({
         <div className="info-form">
             <PersonalDeets
                 name={name}
-                handleChange={handleNameChange}
+                handleNameChange={handleNameChange}
                 email={email}
                 handleEmailChange={handleEmailChange}
                 number={number}
