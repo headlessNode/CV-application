@@ -52,7 +52,32 @@ function CvEducation({ education }) {
     )
 }
 
-function Cv({ name, email, number, address, summary, education }) {
+function CvExperience({ experience }) {
+    return (
+        <div className="cv-expereince">
+            <h2>Experience</h2>
+            {experience.map((exp) => {
+                return (
+                    <div className="exp-deets" key={uuidv4()}>
+                        <div className="date-loc">
+                            <p>{`${exp.startDate} to ${exp.endDate}`}</p>
+                            <p>{`${exp.city}`}</p>
+                        </div>
+                        <div className="org">
+                            <h4>{`${exp.org}`}</h4>
+                            <p>{`${exp.position}`}</p>
+                        </div>
+                        <div className="exp-summary">
+                            <p>{`${exp.summary}`}</p>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
+
+function Cv({ name, email, number, address, summary, education, experience }) {
     return (
         <div className="cv">
             <CvHeader
@@ -63,19 +88,28 @@ function Cv({ name, email, number, address, summary, education }) {
             />
             <CvSummary summary={summary} />
             <CvEducation education={education} />
+            <CvExperience experience={experience} />
         </div>
     )
 }
 
-function ExpereinceForm() {
+function ExperienceForm({ handleAddExperience }) {
     function addExperience(e) {
         const expContainer = e.target.parentElement.parentElement
         const expDeets = expContainer.querySelector('.experience-deets')
         const addExp = expContainer.querySelector('.add-exp')
-        const form = expContainer.querySelector('.experience-form')
-        form.style.display = 'none'
+        const formContainer = expContainer.querySelector('.experience-form')
+        const form = formContainer.querySelector('form')
+        formContainer.style.display = 'none'
         expDeets.style.display = 'block'
         addExp.style.display = 'block'
+        const formData = new FormData(form)
+        const formDataObject = {}
+        formData.forEach((value, key) => {
+            formDataObject[key] = value
+        })
+        handleAddExperience(formDataObject)
+        form.reset()
     }
 
     function cancelExpAddition(e) {
@@ -94,27 +128,32 @@ function ExpereinceForm() {
                 <label>
                     <h4>Company Name</h4>
                 </label>
-                <input type="text" />
+                <input type="text" name="org" autoComplete="off" />
                 <label>
                     <h4>Position Title</h4>
                 </label>
-                <input type="text" />
+                <input type="text" name="position" autoComplete="off" />
                 <label>
                     <h4>Start Date</h4>
                 </label>
-                <input type="date" />
+                <input type="month" name="startDate" autoComplete="off" />
                 <label>
                     <h4>End Date</h4>
                 </label>
-                <input type="date" />
+                <input type="month" name="endDate" autoComplete="off" />
                 <label>
                     <h4>Location</h4>
                 </label>
-                <input type="text" />
+                <input type="text" name="city" autoComplete="off" />
                 <label>
                     <h4>Description</h4>
                 </label>
-                <textarea rows={4} cols={30}></textarea>
+                <textarea
+                    rows={4}
+                    cols={30}
+                    name="summary"
+                    autoComplete="off"
+                ></textarea>
             </form>
             <button className="add-edu" onClick={addExperience}>
                 Add
@@ -126,7 +165,11 @@ function ExpereinceForm() {
     )
 }
 
-function Experience() {
+function Experience({
+    experience,
+    handleAddExperience,
+    handleDeleteExperience,
+}) {
     function showForm(e) {
         const expContainer = e.target.parentElement.parentElement
         const expDeets = expContainer.querySelector('.experience-deets')
@@ -140,16 +183,27 @@ function Experience() {
     return (
         <div className="experience">
             <h1>Expereince</h1>
-            <div className="experience-deets"></div>
-            <div className="add-exp">
-                <button onClick={showForm}>+ Expereince</button>
+            <div className="experience-deets">
+                {experience.map((exp, idx) => (
+                    <div className={exp.org} key={uuidv4()}>
+                        <h4>{exp.org}</h4>
+                        <button
+                            onClick={() => handleDeleteExperience(idx)}
+                            className="fa-solid fa-trash"
+                            style={{ color: '#ff0000' }}
+                        ></button>
+                    </div>
+                ))}
             </div>
-            <ExpereinceForm />
+            <div className="add-exp">
+                <button onClick={showForm}>+ Experience</button>
+            </div>
+            <ExperienceForm handleAddExperience={handleAddExperience} />
         </div>
     )
 }
 
-function EducationForm({ education, handleAddEducation }) {
+function EducationForm({ handleAddEducation }) {
     function addEducation(e) {
         const eduContainer = e.target.parentElement.parentElement
         const eduDeets = eduContainer.querySelector('.education-deets')
@@ -243,10 +297,7 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
             <div className="add-edu">
                 <button onClick={showForm}>+ Education</button>
             </div>
-            <EducationForm
-                education={education}
-                handleAddEducation={handleAddEducation}
-            />
+            <EducationForm handleAddEducation={handleAddEducation} />
         </div>
     )
 }
@@ -333,6 +384,9 @@ function InfoForm({
     education,
     handleAddEducation,
     handleDelelteEducation,
+    experience,
+    handleAddExperience,
+    handleDeleteExperience,
 }) {
     return (
         <div className="info-form">
@@ -355,7 +409,11 @@ function InfoForm({
                 handleAddEducation={handleAddEducation}
                 handleDelelteEducation={handleDelelteEducation}
             />
-            <Experience />
+            <Experience
+                experience={experience}
+                handleAddExperience={handleAddExperience}
+                handleDeleteExperience={handleDeleteExperience}
+            />
         </div>
     )
 }
@@ -375,6 +433,17 @@ function MainGrid() {
             startDate: '2017-09',
             endDate: '2021-07',
             city: 'Gotham, DC',
+        },
+    ])
+    let [experience, setExperience] = useState([
+        {
+            org: 'Wayne Enterprises',
+            position: 'Data Analyst',
+            startDate: '2021-12',
+            endDate: '2022-09',
+            city: 'Gotham, DC',
+            summary:
+                'As a Data Analyst, I was responsible for harnessing the power of data to drive informed decision-making within the organization. My role involved extracting and cleaning data from diverse sources, then delving into its depths through exploratory analysis to uncover valuable insights and trends.',
         },
     ])
 
@@ -407,6 +476,15 @@ function MainGrid() {
         setEducation(eduCpy)
     }
 
+    function handleAddExperience(expDeetsObject) {
+        setExperience([...experience, expDeetsObject])
+    }
+
+    function handleDeleteExperience(index) {
+        let expCpy = experience.filter((e, i) => i !== index)
+        setExperience(expCpy)
+    }
+
     return (
         <div className="main-grid">
             <InfoForm
@@ -423,6 +501,9 @@ function MainGrid() {
                 education={education}
                 handleAddEducation={handleAddEducation}
                 handleDelelteEducation={handleDelelteEducation}
+                experience={experience}
+                handleAddExperience={handleAddExperience}
+                handleDeleteExperience={handleDeleteExperience}
             />
             <Cv
                 name={name}
@@ -431,6 +512,7 @@ function MainGrid() {
                 address={address}
                 summary={summary}
                 education={education}
+                experience={experience}
             />
         </div>
     )
