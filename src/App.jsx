@@ -170,6 +170,8 @@ function Experience({
     handleAddExperience,
     handleDeleteExperience,
 }) {
+    let expDeetsVisible = false
+
     function showForm(e) {
         const expContainer = e.target.parentElement.parentElement
         const expDeets = expContainer.querySelector('.experience-deets')
@@ -180,10 +182,29 @@ function Experience({
         form.style.display = 'block'
     }
 
+    function showExpDeets() {
+        const edDeets = document.querySelector('.experience-deets')
+        edDeets.style.display = 'block'
+        expDeetsVisible = true
+    }
+
+    function hideExpDeets() {
+        const edDeets = document.querySelector('.experience-deets')
+        edDeets.style.display = 'none'
+        expDeetsVisible = false
+    }
+
     return (
         <div className="experience">
-            <h1>Expereince</h1>
-            <div className="experience-deets">
+            <button
+                onClick={() =>
+                    expDeetsVisible ? hideExpDeets() : showExpDeets()
+                }
+            >
+                <h1>Experience</h1>
+                <i className="fa-solid fa-chevron-down"></i>
+            </button>
+            <div className="experience-deets" style={{ display: 'none' }}>
                 {experience.map((exp, idx) => (
                     <div className={exp.org} key={uuidv4()}>
                         <h4>{exp.org}</h4>
@@ -269,6 +290,8 @@ function EducationForm({ handleAddEducation }) {
 }
 
 function Education({ education, handleAddEducation, handleDelelteEducation }) {
+    let edDeetsVisible = false
+
     function showForm(e) {
         const eduContainer = e.target.parentElement.parentElement
         const eduDeets = eduContainer.querySelector('.education-deets')
@@ -279,10 +302,27 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
         form.style.display = 'block'
     }
 
+    function showEdDeets() {
+        const edDeets = document.querySelector('.education-deets')
+        edDeets.style.display = 'block'
+        edDeetsVisible = true
+    }
+
+    function hideEdDeets() {
+        const edDeets = document.querySelector('.education-deets')
+        edDeets.style.display = 'none'
+        edDeetsVisible = false
+    }
+
     return (
         <div className="education">
-            <h1>Education</h1>
-            <div className="education-deets">
+            <button
+                onClick={() => (edDeetsVisible ? hideEdDeets() : showEdDeets())}
+            >
+                <h1>Education</h1>
+                <i className="fa-solid fa-chevron-up"></i>
+            </button>
+            <div className="education-deets" style={{ display: 'none' }}>
                 {education.map((edu, idx) => (
                     <div className={edu.school} key={uuidv4()}>
                         <h4>{edu.school}</h4>
