@@ -1,8 +1,13 @@
 .main-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     max-width: 1280px;
     min-width: 750px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.main-grid .cv {
+    min-height: 100vh;
 }
 
 .main-grid .education .education-form {
