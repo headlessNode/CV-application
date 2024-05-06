@@ -149,7 +149,7 @@ function Experience() {
     )
 }
 
-function EducationForm({ education, handleEducationChange }) {
+function EducationForm({ education, handleAddEducation }) {
     function addEducation(e) {
         const eduContainer = e.target.parentElement.parentElement
         const eduDeets = eduContainer.querySelector('.education-deets')
@@ -164,7 +164,7 @@ function EducationForm({ education, handleEducationChange }) {
         formData.forEach((value, key) => {
             formDataObject[key] = value
         })
-        handleEducationChange(formDataObject)
+        handleAddEducation(formDataObject)
         form.reset()
     }
 
@@ -214,7 +214,7 @@ function EducationForm({ education, handleEducationChange }) {
     )
 }
 
-function Education({ education, handleEducationChange }) {
+function Education({ education, handleAddEducation, handleDelelteEducation }) {
     function showForm(e) {
         const eduContainer = e.target.parentElement.parentElement
         const eduDeets = eduContainer.querySelector('.education-deets')
@@ -229,10 +229,11 @@ function Education({ education, handleEducationChange }) {
         <div className="education">
             <h1>Education</h1>
             <div className="education-deets">
-                {education.map((edu) => (
+                {education.map((edu, idx) => (
                     <div className={edu.school} key={uuidv4()}>
                         <h4>{edu.school}</h4>
                         <button
+                            onClick={() => handleDelelteEducation(idx)}
                             className="fa-solid fa-trash"
                             style={{ color: '#ff0000' }}
                         ></button>
@@ -244,7 +245,7 @@ function Education({ education, handleEducationChange }) {
             </div>
             <EducationForm
                 education={education}
-                handleEducationChange={handleEducationChange}
+                handleAddEducation={handleAddEducation}
             />
         </div>
     )
@@ -330,7 +331,8 @@ function InfoForm({
     summary,
     handleSummaryChange,
     education,
-    handleEducationChange,
+    handleAddEducation,
+    handleDelelteEducation,
 }) {
     return (
         <div className="info-form">
@@ -350,7 +352,8 @@ function InfoForm({
             />
             <Education
                 education={education}
-                handleEducationChange={handleEducationChange}
+                handleAddEducation={handleAddEducation}
+                handleDelelteEducation={handleDelelteEducation}
             />
             <Experience />
         </div>
@@ -395,8 +398,13 @@ function MainGrid() {
         setSummary(e.target.value)
     }
 
-    function handleEducationChange(eduDeetsObject) {
+    function handleAddEducation(eduDeetsObject) {
         setEducation([...education, eduDeetsObject])
+    }
+
+    function handleDelelteEducation(index) {
+        let eduCpy = education.filter((e, i) => i !== index)
+        setEducation(eduCpy)
     }
 
     return (
@@ -413,7 +421,8 @@ function MainGrid() {
                 summary={summary}
                 handleSummaryChange={handleSummaryChange}
                 education={education}
-                handleEducationChange={handleEducationChange}
+                handleAddEducation={handleAddEducation}
+                handleDelelteEducation={handleDelelteEducation}
             />
             <Cv
                 name={name}
