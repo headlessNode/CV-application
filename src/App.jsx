@@ -21,6 +21,54 @@ function CvHeader({ name, email, number, address }) {
     )
 }
 
+function CvSkills({
+    skillOne,
+    skillTwo,
+    skillThree,
+    skillFour,
+    skillFive,
+    skillSix,
+    skillSeven,
+    skillEight,
+}) {
+    return (
+        <div className="skills">
+            <div className="col-one">
+                <ul>
+                    <li>
+                        <p>{skillOne}</p>
+                    </li>
+                    <li>
+                        <p>{skillTwo}</p>
+                    </li>
+                    <li>
+                        <p>{skillThree}</p>
+                    </li>
+                    <li>
+                        <p>{skillFour}</p>
+                    </li>
+                </ul>
+            </div>
+            <div className="col-two">
+                <ul>
+                    <li>
+                        <p>{skillFive}</p>
+                    </li>
+                    <li>
+                        <p>{skillSix}</p>
+                    </li>
+                    <li>
+                        <p>{skillSeven}</p>
+                    </li>
+                    <li>
+                        <p>{skillEight}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    )
+}
+
 function CvSummary({ summary }) {
     return (
         <div className="cv-summary">
@@ -77,7 +125,23 @@ function CvExperience({ experience }) {
     )
 }
 
-function Cv({ name, email, number, address, summary, education, experience }) {
+function Cv({
+    name,
+    email,
+    number,
+    address,
+    summary,
+    education,
+    experience,
+    skillOne,
+    skillTwo,
+    skillThree,
+    skillFour,
+    skillFive,
+    skillSix,
+    skillSeven,
+    skillEight,
+}) {
     return (
         <div className="cv">
             <CvHeader
@@ -85,6 +149,16 @@ function Cv({ name, email, number, address, summary, education, experience }) {
                 email={email}
                 number={number}
                 address={address}
+            />
+            <CvSkills
+                skillOne={skillOne}
+                skillTwo={skillTwo}
+                skillThree={skillThree}
+                skillFour={skillFour}
+                skillFive={skillFive}
+                skillSix={skillSix}
+                skillSeven={skillSeven}
+                skillEight={skillEight}
             />
             <CvSummary summary={summary} />
             <CvEducation education={education} />
@@ -359,6 +433,91 @@ function Summary({ summary, handleSummaryChange }) {
     )
 }
 
+function Skills({
+    skillOne,
+    handleSkillOne,
+    skillTwo,
+    handleSkillTwo,
+    skillThree,
+    handleSkillThree,
+    skillFour,
+    handleSkillFour,
+    skillFive,
+    handleSkillFive,
+    skillSix,
+    handleSkillSix,
+    skillSeven,
+    handleSkillSeven,
+    skillEight,
+    handleSkillEight,
+}) {
+    return (
+        <div className="skills">
+            <label>
+                <h1>Skills</h1>
+            </label>
+            <ul>
+                <li>
+                    <input
+                        type="text"
+                        value={skillOne}
+                        onChange={(e) => handleSkillOne(e)}
+                    />
+                </li>
+                <li>
+                    <input
+                        type="text"
+                        value={skillTwo}
+                        onChange={(e) => handleSkillTwo(e)}
+                    />
+                </li>
+                <li>
+                    <input
+                        type="text"
+                        value={skillThree}
+                        onChange={(e) => handleSkillThree(e)}
+                    />
+                </li>
+                <li>
+                    <input
+                        type="text"
+                        value={skillFour}
+                        onChange={(e) => handleSkillFour(e)}
+                    />
+                </li>
+                <li>
+                    <input
+                        type="text"
+                        value={skillFive}
+                        onChange={(e) => handleSkillFive(e)}
+                    />
+                </li>
+                <li>
+                    <input
+                        type="text"
+                        value={skillSix}
+                        onChange={(e) => handleSkillSix(e)}
+                    />
+                </li>
+                <li>
+                    <input
+                        type="text"
+                        value={skillSeven}
+                        onChange={(e) => handleSkillSeven(e)}
+                    />
+                </li>
+                <li>
+                    <input
+                        type="text"
+                        value={skillEight}
+                        onChange={(e) => handleSkillEight(e)}
+                    />
+                </li>
+            </ul>
+        </div>
+    )
+}
+
 function PersonalDeets({
     name,
     handleNameChange,
@@ -419,6 +578,23 @@ function InfoForm({
     handleNumberChange,
     address,
     handleAddressChange,
+    skillOne,
+    handleSkillOne,
+    skillTwo,
+    handleSkillTwo,
+    skillThree,
+    handleSkillThree,
+    skillFour,
+    handleSkillFour,
+    skillFive,
+    handleSkillFive,
+    skillSix,
+    handleSkillSix,
+    skillSeven,
+    handleSkillSeven,
+    skillEight,
+    handleSkillEight,
+
     summary,
     handleSummaryChange,
     education,
@@ -439,6 +615,24 @@ function InfoForm({
                 handleNumberChange={handleNumberChange}
                 address={address}
                 handleAddressChange={handleAddressChange}
+            />
+            <Skills
+                skillOne={skillOne}
+                handleSkillOne={handleSkillOne}
+                skillTwo={skillTwo}
+                handleSkillTwo={handleSkillTwo}
+                skillThree={skillThree}
+                handleSkillThree={handleSkillThree}
+                skillFour={skillFour}
+                handleSkillFour={handleSkillFour}
+                skillFive={skillFive}
+                handleSkillFive={handleSkillFive}
+                skillSix={skillSix}
+                handleSkillSix={handleSkillSix}
+                skillSeven={skillSeven}
+                handleSkillSeven={handleSkillSeven}
+                skillEight={skillEight}
+                handleSkillEight={handleSkillEight}
             />
             <Summary
                 summary={summary}
@@ -463,6 +657,14 @@ function MainGrid() {
     let [email, setEmail] = useState('jDoe@example.com')
     let [number, setNumber] = useState('+123-456-789')
     let [address, setAddress] = useState('Gotham, DC')
+    let [skillOne, setSkillOne] = useState('HTML')
+    let [skillTwo, setSkillTwo] = useState('CSS')
+    let [skillThree, setSkillThree] = useState('JavaScript')
+    let [skillFour, setSkillFour] = useState('React')
+    let [skillFive, setSkillFive] = useState('Node.js')
+    let [skillSix, setSkillSix] = useState('Webpack')
+    let [skillSeven, setSkillSeven] = useState('Python')
+    let [skillEight, setSkillEight] = useState('Responsive Design')
     let [summary, setSummary] = useState(
         'Brief paragraph on skills and expereince.'
     )
@@ -503,6 +705,38 @@ function MainGrid() {
         setAddress(e.target.value)
     }
 
+    function handleSkillOne(e) {
+        setSkillOne(e.target.value)
+    }
+
+    function handleSkillTwo(e) {
+        setSkillTwo(e.target.value)
+    }
+
+    function handleSkillThree(e) {
+        setSkillThree(e.target.value)
+    }
+
+    function handleSkillFour(e) {
+        setSkillFour(e.target.value)
+    }
+
+    function handleSkillFive(e) {
+        setSkillFive(e.target.value)
+    }
+
+    function handleSkillSix(e) {
+        setSkillSix(e.target.value)
+    }
+
+    function handleSkillSeven(e) {
+        setSkillSeven(e.target.value)
+    }
+
+    function handleSkillEight(e) {
+        setSkillEight(e.target.value)
+    }
+
     function handleSummaryChange(e) {
         setSummary(e.target.value)
     }
@@ -536,6 +770,22 @@ function MainGrid() {
                 handleNumberChange={handleNumberChange}
                 address={address}
                 handleAddressChange={handleAddressChange}
+                skillOne={skillOne}
+                handleSkillOne={handleSkillOne}
+                skillTwo={skillTwo}
+                handleSkillTwo={handleSkillTwo}
+                skillThree={skillThree}
+                handleSkillThree={handleSkillThree}
+                skillFour={skillFour}
+                handleSkillFour={handleSkillFour}
+                skillFive={skillFive}
+                handleSkillFive={handleSkillFive}
+                skillSix={skillSix}
+                handleSkillSix={handleSkillSix}
+                skillSeven={skillSeven}
+                handleSkillSeven={handleSkillSeven}
+                skillEight={skillEight}
+                handleSkillEight={handleSkillEight}
                 summary={summary}
                 handleSummaryChange={handleSummaryChange}
                 education={education}
@@ -551,6 +801,14 @@ function MainGrid() {
                 number={number}
                 address={address}
                 summary={summary}
+                skillOne={skillOne}
+                skillTwo={skillTwo}
+                skillThree={skillThree}
+                skillFour={skillFour}
+                skillFive={skillFive}
+                skillSix={skillSix}
+                skillSeven={skillSeven}
+                skillEight={skillEight}
                 education={education}
                 experience={experience}
             />
