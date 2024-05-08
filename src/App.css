@@ -61,7 +61,8 @@
     }
 }
 
-.main-grid .info-form .education {
+.main-grid .info-form .education,
+.main-grid .info-form .experience {
     background: var(--main-bg-color);
     box-shadow: 2px 2px 8px 3px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
@@ -72,7 +73,8 @@
     }
 }
 
-.main-grid .info-form .education .education-deets > * {
+.main-grid .info-form .education .education-deets > *,
+.main-grid .info-form .experience .experience-deets > * {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -83,7 +85,8 @@
     }
 }
 
-.main-grid .info-form .education .main-btn {
+.main-grid .info-form .education .main-btn,
+.main-grid .info-form .experience .main-btn {
     padding: 20px;
     border: none;
     border-top-right-radius: 20px;
@@ -95,7 +98,8 @@
     justify-content: space-between;
 }
 
-.main-grid .info-form .education .add-edu {
+.main-grid .info-form .education .add-edu,
+.main-grid .info-form .experience .add-exp {
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -137,6 +141,32 @@
     display: grid;
 }
 
-.main-grid .experience .experience-form {
+.main-grid .experience .experience-form.hidden {
     display: none;
+}
+
+.main-grid .experience .experience-form.visible {
+    display: grid;
+}
+
+.main-grid .info-form .experience .experience-deets.hidden {
+    display: none;
+}
+
+.main-grid .info-form .experience .experience-deets.visible {
+    display: grid;
+    gap: 10px;
+}
+
+.main-grid .info-form .experience .add-exp.hidden {
+    display: none;
+}
+
+.main-grid .info-form .experience .add-exp.visible {
+    display: flex;
+}
+
+.main-grid .info-form .experience.deets-hidden .main-btn {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }

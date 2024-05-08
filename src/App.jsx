@@ -174,9 +174,12 @@ function ExperienceForm({ handleAddExperience }) {
         const addExp = expContainer.querySelector('.add-exp')
         const formContainer = expContainer.querySelector('.experience-form')
         const form = formContainer.querySelector('form')
-        formContainer.style.display = 'none'
-        expDeets.style.display = 'block'
-        addExp.style.display = 'block'
+        formContainer.classList.remove('visible')
+        formContainer.classList.add('hidden')
+        expDeets.classList.remove('hidden')
+        expDeets.classList.add('visible')
+        addExp.classList.remove('hidden')
+        addExp.classList.add('visible')
         const formData = new FormData(form)
         const formDataObject = {}
         formData.forEach((value, key) => {
@@ -191,13 +194,16 @@ function ExperienceForm({ handleAddExperience }) {
         const expDeets = expContainer.querySelector('.experience-deets')
         const addExp = expContainer.querySelector('.add-exp')
         const form = expContainer.querySelector('.experience-form')
-        form.style.display = 'none'
-        expDeets.style.display = 'block'
-        addExp.style.display = 'block'
+        form.classList.remove('visible')
+        form.classList.add('hidden')
+        expDeets.classList.remove('hidden')
+        expDeets.classList.add('visible')
+        addExp.classList.remove('hidden')
+        addExp.classList.add('visible')
     }
 
     return (
-        <div className="experience-form">
+        <div className="experience-form hidden">
             <form>
                 <label>
                     <h4>Company Name</h4>
@@ -251,26 +257,43 @@ function Experience({
         const expDeets = expContainer.querySelector('.experience-deets')
         const addExp = expContainer.querySelector('.add-exp')
         const form = expContainer.querySelector('.experience-form')
-        expDeets.style.display = 'none'
-        addExp.style.display = 'none'
-        form.style.display = 'block'
+        expDeets.classList.remove('visible')
+        expDeets.classList.add('hidden')
+        addExp.classList.remove('visible')
+        addExp.classList.add('hidden')
+        form.classList.remove('hidden')
+        form.classList.add('visible')
     }
 
     function showExpDeets() {
-        const edDeets = document.querySelector('.experience-deets')
-        edDeets.style.display = 'block'
+        const expContainer = document.querySelector('.experience')
+        const expDeets = document.querySelector('.experience-deets')
+        const addExp = document.querySelector('.add-exp')
+        expContainer.classList.remove('deets-hidden')
+        expDeets.classList.remove('hidden')
+        expDeets.classList.add('visible')
+        addExp.classList.remove('hidden')
+        addExp.classList.add('visible')
         expDeetsVisible = true
     }
 
     function hideExpDeets() {
-        const edDeets = document.querySelector('.experience-deets')
-        edDeets.style.display = 'none'
+        const expContainer = document.querySelector('.experience')
+        const children = expContainer.children
+        expContainer.classList.add('deets-hidden')
+        for (const child of children) {
+            if (child.classList.contains('visible')) {
+                child.classList.add('hidden')
+                child.classList.remove('visible')
+            }
+        }
         expDeetsVisible = false
     }
 
     return (
-        <div className="experience">
+        <div className="experience deets-hidden">
             <button
+                className="main-btn"
                 onClick={() =>
                     expDeetsVisible ? hideExpDeets() : showExpDeets()
                 }
@@ -278,7 +301,7 @@ function Experience({
                 <h1>Experience</h1>
                 <i className="fa-solid fa-chevron-down"></i>
             </button>
-            <div className="experience-deets" style={{ display: 'none' }}>
+            <div className="experience-deets hidden">
                 {experience.map((exp, idx) => (
                     <div className={exp.org} key={uuidv4()}>
                         <h4>{exp.org}</h4>
@@ -290,7 +313,7 @@ function Experience({
                     </div>
                 ))}
             </div>
-            <div className="add-exp">
+            <div className="add-exp hidden">
                 <button onClick={showForm}>+ Experience</button>
             </div>
             <ExperienceForm handleAddExperience={handleAddExperience} />
