@@ -73,6 +73,64 @@
     }
 }
 
+.main-grid .info-form .education.form-visible,
+.main-grid .info-form .experience.form-visible {
+    gap: 0px;
+}
+
+.main-grid .info-form .education .education-form form,
+.main-grid .info-form .experience .experience-form form {
+    padding: 20px;
+    display: grid;
+    gap: 10px;
+}
+
+.main-grid .info-form .experience .experience-form form .exp-descrip textarea {
+    resize: none;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: var(--main-bg-color);
+    width: 100%;
+}
+
+.main-grid .info-form .education .education-form form .edu-duration,
+.main-grid .info-form .experience .experience-form form .exp-duration {
+    display: flex;
+    gap: 15px;
+    > * {
+        width: 100%;
+    }
+}
+
+.main-grid .info-form .education .education-form .form-btns,
+.main-grid .info-form .experience .experience-form .form-btns {
+    display: flex;
+    padding: 0 20px 10px 20px;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.main-grid .info-form .education .education-form .form-btns button,
+.main-grid .info-form .experience .experience-form .form-btns button {
+    padding: 10px 20px 10px 20px;
+    border-radius: 5px;
+}
+
+.main-grid .info-form .education .education-form .form-btns .add-edu-deets,
+.main-grid .info-form .experience .experience-form .form-btns .add-exp-deets {
+    background: #187ff5;
+    color: #fff;
+    border: none;
+}
+
+.main-grid .info-form .education .education-form .form-btns .cancel,
+.main-grid .info-form .experience .experience-form .form-btns .cancel {
+    background: none;
+    color: #808080;
+    border: 2px solid #ccc;
+}
+
 .main-grid .info-form .education .education-deets > *,
 .main-grid .info-form .experience .experience-deets > * {
     width: 100%;

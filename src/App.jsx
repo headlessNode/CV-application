@@ -174,6 +174,7 @@ function ExperienceForm({ handleAddExperience }) {
         const addExp = expContainer.querySelector('.add-exp')
         const formContainer = expContainer.querySelector('.experience-form')
         const form = formContainer.querySelector('form')
+        expContainer.classList.remove('form-visible')
         formContainer.classList.remove('visible')
         formContainer.classList.add('hidden')
         expDeets.classList.remove('hidden')
@@ -194,6 +195,7 @@ function ExperienceForm({ handleAddExperience }) {
         const expDeets = expContainer.querySelector('.experience-deets')
         const addExp = expContainer.querySelector('.add-exp')
         const form = expContainer.querySelector('.experience-form')
+        expContainer.classList.remove('form-visible')
         form.classList.remove('visible')
         form.classList.add('hidden')
         expDeets.classList.remove('hidden')
@@ -205,42 +207,62 @@ function ExperienceForm({ handleAddExperience }) {
     return (
         <div className="experience-form hidden">
             <form>
-                <label>
-                    <h4>Company Name</h4>
-                </label>
-                <input type="text" name="org" autoComplete="off" />
-                <label>
-                    <h4>Position Title</h4>
-                </label>
-                <input type="text" name="position" autoComplete="off" />
-                <label>
-                    <h4>Start Date</h4>
-                </label>
-                <input type="month" name="startDate" autoComplete="off" />
-                <label>
-                    <h4>End Date</h4>
-                </label>
-                <input type="month" name="endDate" autoComplete="off" />
-                <label>
-                    <h4>Location</h4>
-                </label>
-                <input type="text" name="city" autoComplete="off" />
-                <label>
-                    <h4>Description</h4>
-                </label>
-                <textarea
-                    rows={4}
-                    cols={30}
-                    name="summary"
-                    autoComplete="off"
-                ></textarea>
+                <div className="org">
+                    <label>
+                        <h4>Organization</h4>
+                    </label>
+                    <input type="text" name="org" autoComplete="off" />
+                </div>
+                <div className="position">
+                    <label>
+                        <h4>Position Title</h4>
+                    </label>
+                    <input type="text" name="position" autoComplete="off" />
+                </div>
+                <div className="exp-duration">
+                    <div className="exp-start">
+                        <label>
+                            <h4>Start Date</h4>
+                        </label>
+                        <input
+                            type="month"
+                            name="startDate"
+                            autoComplete="off"
+                        />
+                    </div>
+                    <div className="exp-end">
+                        <label>
+                            <h4>End Date</h4>
+                        </label>
+                        <input type="month" name="endDate" autoComplete="off" />
+                    </div>
+                </div>
+                <div className="exp-loc">
+                    <label>
+                        <h4>Location</h4>
+                    </label>
+                    <input type="text" name="city" autoComplete="off" />
+                </div>
+                <div className="exp-descrip">
+                    <label>
+                        <h4>Description</h4>
+                    </label>
+                    <textarea
+                        rows={4}
+                        cols={30}
+                        name="summary"
+                        autoComplete="off"
+                    ></textarea>
+                </div>
             </form>
-            <button className="add-edu" onClick={addExperience}>
-                Add
-            </button>
-            <button className="cancel" onClick={cancelExpAddition}>
-                Cancel
-            </button>
+            <div className="form-btns">
+                <button className="add-exp-deets" onClick={addExperience}>
+                    Add
+                </button>
+                <button className="cancel" onClick={cancelExpAddition}>
+                    Cancel
+                </button>
+            </div>
         </div>
     )
 }
@@ -257,6 +279,7 @@ function Experience({
         const expDeets = expContainer.querySelector('.experience-deets')
         const addExp = expContainer.querySelector('.add-exp')
         const form = expContainer.querySelector('.experience-form')
+        expContainer.classList.add('form-visible')
         expDeets.classList.remove('visible')
         expDeets.classList.add('hidden')
         addExp.classList.remove('visible')
@@ -328,6 +351,7 @@ function EducationForm({ handleAddEducation }) {
         const addEdu = eduContainer.querySelector('.add-edu')
         const formContainer = eduContainer.querySelector('.education-form')
         const form = formContainer.querySelector('form')
+        eduContainer.classList.remove('form-visible')
         formContainer.classList.remove('visible')
         formContainer.classList.add('hidden')
         eduDeets.classList.add('visible')
@@ -349,6 +373,7 @@ function EducationForm({ handleAddEducation }) {
         const addEdu = eduContainer.querySelector('.add-edu')
         const formContainer = eduContainer.querySelector('.education-form')
         const form = formContainer.querySelector('form')
+        eduContainer.classList.remove('form-visible')
         formContainer.classList.remove('visible')
         formContainer.classList.add('hidden')
         eduDeets.classList.remove('hidden')
@@ -361,33 +386,51 @@ function EducationForm({ handleAddEducation }) {
     return (
         <div className="education-form hidden">
             <form>
-                <label>
-                    <h4>School</h4>
-                </label>
-                <input type="text" name="school" autoComplete="off" />
-                <label>
-                    <h4>Degree</h4>
-                </label>
-                <input type="text" name="degree" autoComplete="off" />
-                <label>
-                    <h4>Start Date</h4>
-                </label>
-                <input type="month" name="startDate" autoComplete="off" />
-                <label>
-                    <h4>End Date</h4>
-                </label>
-                <input type="month" name="endDate" autoComplete="off" />
-                <label>
-                    <h4>Location</h4>
-                </label>
-                <input type="text" name="city" autoComplete="off" />
+                <div className="school">
+                    <label>
+                        <h4>School</h4>
+                    </label>
+                    <input type="text" name="school" autoComplete="off" />
+                </div>
+                <div className="degree">
+                    <label>
+                        <h4>Degree</h4>
+                    </label>
+                    <input type="text" name="degree" autoComplete="off" />
+                </div>
+                <div className="edu-duration">
+                    <div className="start-date">
+                        <label>
+                            <h4>Start Date</h4>
+                        </label>
+                        <input
+                            type="month"
+                            name="startDate"
+                            autoComplete="off"
+                        />
+                    </div>
+                    <div className="end-date">
+                        <label>
+                            <h4>End Date</h4>
+                        </label>
+                        <input type="month" name="endDate" autoComplete="off" />
+                    </div>
+                </div>
+                <div className="location">
+                    <label>
+                        <h4>Location</h4>
+                    </label>
+                    <input type="text" name="city" autoComplete="off" />
+                </div>
             </form>
-            <button className="add-edu-deets" onClick={addEducation}>
-                Add
-            </button>
-            <button className="cancel" onClick={cancelEduAddition}>
-                Cancel
-            </button>
+            <div className="form-btns">
+                <button className="add-edu-deets" onClick={addEducation}>
+                    Add
+                </button>
+                <button className="cancel" onClick={cancelEduAddition}>
+                    Cancel
+                </button>
+            </div>
         </div>
     )
 }
@@ -401,6 +444,7 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
         const addEdu = eduContainer.querySelector('.add-edu')
         const form = eduContainer.querySelector('.education-form')
         eduContainer.classList.remove('deets-hidden')
+        eduContainer.classList.add('form-visible')
         eduDeets.classList.remove('visible')
         eduDeets.classList.add('hidden')
         addEdu.classList.remove('visible')
