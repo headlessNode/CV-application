@@ -169,7 +169,7 @@ function Cv({
 
 function ExperienceForm({ handleAddExperience }) {
     function addExperience(e) {
-        const expContainer = e.target.parentElement.parentElement
+        const expContainer = document.querySelector('.experience')
         const expDeets = expContainer.querySelector('.experience-deets')
         const addExp = expContainer.querySelector('.add-exp')
         const formContainer = expContainer.querySelector('.experience-form')
@@ -191,7 +191,7 @@ function ExperienceForm({ handleAddExperience }) {
     }
 
     function cancelExpAddition(e) {
-        const expContainer = e.target.parentElement.parentElement
+        const expContainer = document.querySelector('.experience')
         const expDeets = expContainer.querySelector('.experience-deets')
         const addExp = expContainer.querySelector('.add-exp')
         const form = expContainer.querySelector('.experience-form')
@@ -275,7 +275,7 @@ function Experience({
     let expDeetsVisible = false
 
     function showForm(e) {
-        const expContainer = e.target.parentElement.parentElement
+        const expContainer = document.querySelector('.experience')
         const expDeets = expContainer.querySelector('.experience-deets')
         const addExp = expContainer.querySelector('.add-exp')
         const form = expContainer.querySelector('.experience-form')
@@ -346,7 +346,7 @@ function Experience({
 
 function EducationForm({ handleAddEducation }) {
     function addEducation(e) {
-        const eduContainer = e.target.parentElement.parentElement
+        const eduContainer = document.querySelector('.education')
         const eduDeets = eduContainer.querySelector('.education-deets')
         const addEdu = eduContainer.querySelector('.add-edu')
         const formContainer = eduContainer.querySelector('.education-form')
@@ -368,7 +368,7 @@ function EducationForm({ handleAddEducation }) {
     }
 
     function cancelEduAddition(e) {
-        const eduContainer = e.target.parentElement.parentElement
+        const eduContainer = document.querySelector('.education')
         const eduDeets = eduContainer.querySelector('.education-deets')
         const addEdu = eduContainer.querySelector('.add-edu')
         const formContainer = eduContainer.querySelector('.education-form')
@@ -439,7 +439,7 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
     let edDeetsVisible = false
 
     function showForm(e) {
-        const eduContainer = e.target.parentElement.parentElement
+        const eduContainer = document.querySelector('.education')
         const eduDeets = eduContainer.querySelector('.education-deets')
         const addEdu = eduContainer.querySelector('.add-edu')
         const form = eduContainer.querySelector('.education-form')
@@ -485,7 +485,7 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
                 onClick={() => (edDeetsVisible ? hideEdDeets() : showEdDeets())}
             >
                 <h1>Education</h1>
-                <i className="fa-solid fa-chevron-up"></i>
+                <i className="fa-solid fa-chevron-down"></i>
             </button>
             <div className="education-deets hidden">
                 {education.map((edu, idx) => (
@@ -508,19 +508,48 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
 }
 
 function Summary({ summary, handleSummaryChange }) {
+    let sumDeetsVisible = false
+
+    function showSumDeets() {
+        const infoForm = document.querySelector('.info-form')
+        const summary = infoForm.querySelector('.summary')
+        const children = infoForm.children
+        for (let i = 3; i < children.length; i++) {
+            if (!children[i].classList.contains('deets-hidden')) {
+                children[i].classList.add('deets-hidden')
+            }
+        }
+        summary.classList.remove('deets-hidden')
+        sumDeetsVisible = true
+    }
+
+    function hideSumDeets() {
+        const infoForm = document.querySelector('.info-form')
+        const summary = infoForm.querySelector('.summary')
+        summary.classList.add('deets-hidden')
+        sumDeetsVisible = false
+    }
+
     return (
-        <form className="summary">
-            <label>
+        <div className="summary deets-hidden">
+            <button
+                className="main-btn"
+                onClick={() =>
+                    sumDeetsVisible ? hideSumDeets() : showSumDeets()
+                }
+            >
                 <h1>Summary</h1>
-            </label>
-            <textarea
-                className="summary-txt"
-                value={summary}
-                onChange={(e) => handleSummaryChange(e)}
-                cols={30}
-                rows={4}
-            ></textarea>
-        </form>
+                <i className="fa-solid fa-chevron-down"></i>
+            </button>
+            <form>
+                <textarea
+                    value={summary}
+                    onChange={(e) => handleSummaryChange(e)}
+                    cols={30}
+                    rows={4}
+                ></textarea>
+            </form>
+        </div>
     )
 }
 
@@ -624,45 +653,51 @@ function PersonalDeets({
             <label>
                 <h1>Personal Details</h1>
             </label>
-            <div className="name">
-                <label>
-                    <h4>Full name</h4>
-                </label>
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => handleNameChange(e)}
-                />
-            </div>
-            <div className="email">
-                <label>
-                    <h4>Email</h4>
-                </label>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => handleEmailChange(e)}
-                />
-            </div>
-            <div className="number">
-                <label>
-                    <h4>Phone number</h4>
-                </label>
-                <input
-                    type="text"
-                    value={number}
-                    onChange={(e) => handleNumberChange(e)}
-                />
-            </div>
-            <div className="address">
-                <label>
-                    <h4>Address</h4>
-                </label>
-                <input
-                    type="text"
-                    value={address}
-                    onChange={(e) => handleAddressChange(e)}
-                />
+            <div className="deets">
+                <div className="name-email">
+                    <div className="name">
+                        <label>
+                            <h4>Full name</h4>
+                        </label>
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => handleNameChange(e)}
+                        />
+                    </div>
+                    <div className="email">
+                        <label>
+                            <h4>Email</h4>
+                        </label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => handleEmailChange(e)}
+                        />
+                    </div>
+                </div>
+                <div className="num-addr">
+                    <div className="number">
+                        <label>
+                            <h4>Phone number</h4>
+                        </label>
+                        <input
+                            type="text"
+                            value={number}
+                            onChange={(e) => handleNumberChange(e)}
+                        />
+                    </div>
+                    <div className="address">
+                        <label>
+                            <h4>Address</h4>
+                        </label>
+                        <input
+                            type="text"
+                            value={address}
+                            onChange={(e) => handleAddressChange(e)}
+                        />
+                    </div>
+                </div>
             </div>
         </form>
     )

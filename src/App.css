@@ -9,11 +9,16 @@
 
 .main-grid .info-form {
     display: grid;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    grid-template-rows: 250px 250px 0.2fr 0.2fr 0.2fr;
     gap: 30px;
 }
 
 .main-grid .cv {
-    min-height: 100vh;
+    min-height: 120vh;
+    padding-top: 60px;
+    padding-bottom: 60px;
 }
 
 .main-grid .info-form .personal-deets {
@@ -27,6 +32,20 @@
         display: grid;
         gap: 10px;
     }
+}
+
+.main-grid .info-form .personal-deets .deets {
+    display: flex;
+    gap: 10px;
+    > * {
+        width: 100%;
+    }
+}
+
+.main-grid .info-form .personal-deets .deets .name-email,
+.main-grid .info-form .personal-deets .deets .num-addr {
+    display: grid;
+    gap: 10px;
 }
 
 .main-grid .info-form .skills {
@@ -49,15 +68,33 @@
     background-color: var(--info-form-color);
     border-radius: 20px;
     box-shadow: 2px 2px 8px 3px rgba(0, 0, 0, 0.2);
-    padding: 20px;
     display: grid;
-    gap: 15px;
-    > .summary-txt {
-        resize: none;
-        padding: 10px;
-        border-radius: 8px;
-        border: none;
-        background: var(--main-bg-color);
+    > form {
+        padding: 0 20px 20px 20px;
+    }
+}
+
+.main-grid .info-form .summary .main-btn {
+    padding: 20px;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-grid .info-form .summary form textarea {
+    resize: none;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: var(--main-bg-color);
+    width: 100%;
+}
+
+.main-grid .info-form .summary.deets-hidden {
+    > form {
+        display: none;
     }
 }
 
