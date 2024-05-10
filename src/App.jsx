@@ -292,6 +292,29 @@ function Experience({
         const expContainer = document.querySelector('.experience')
         const expDeets = document.querySelector('.experience-deets')
         const addExp = document.querySelector('.add-exp')
+        const education = document.querySelector('.education')
+        const summary = document.querySelector('.summary')
+        if (!education.classList.contains('deets-hidden')) {
+            education.classList.add('deets-hidden')
+            const edDeets = education.querySelector('.education-deets')
+            const addEdu = education.querySelector('.add-edu')
+            const eduForm = education.querySelector('.education-form')
+            if (education.classList.contains('form-visible')) {
+                education.classList.remove('form-visible')
+            }
+            edDeets.classList.remove('visible')
+            edDeets.classList.add('hidden')
+            addEdu.classList.remove('visible')
+            addEdu.classList.add('hidden')
+            eduForm.classList.remove('visible')
+            eduForm.classList.add('hidden')
+        }
+        if (!summary.classList.contains('deets-hidden')) {
+            summary.classList.add('deets-hidden')
+            const sumForm = summary.querySelector('form')
+            sumForm.classList.remove('visible')
+            sumForm.classList.add('hidden')
+        }
         expContainer.classList.remove('deets-hidden')
         expDeets.classList.remove('hidden')
         expDeets.classList.add('visible')
@@ -304,6 +327,9 @@ function Experience({
         const expContainer = document.querySelector('.experience')
         const children = expContainer.children
         expContainer.classList.add('deets-hidden')
+        if (expContainer.classList.contains('form-visible')) {
+            expContainer.classList.remove('form-visible')
+        }
         for (const child of children) {
             if (child.classList.contains('visible')) {
                 child.classList.add('hidden')
@@ -457,6 +483,29 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
         const educationContainer = document.querySelector('.education')
         const educationDeets = document.querySelector('.education-deets')
         const addEduBtn = document.querySelector('.add-edu')
+        const experience = document.querySelector('.experience')
+        const summary = document.querySelector('.summary')
+        if (!summary.classList.contains('deets-hidden')) {
+            summary.classList.add('deets-hidden')
+            const sumForm = summary.querySelector('form')
+            sumForm.classList.remove('visible')
+            sumForm.classList.add('hidden')
+        }
+        if (!experience.classList.contains('deets-hidden')) {
+            experience.classList.add('deets-hidden')
+            const expDeets = experience.querySelector('.experience-deets')
+            const addExp = experience.querySelector('.add-exp')
+            const expForm = experience.querySelector('.experience-form')
+            if (experience.classList.contains('form-visible')) {
+                experience.classList.remove('form-visible')
+            }
+            expDeets.classList.remove('visible')
+            expDeets.classList.add('hidden')
+            addExp.classList.remove('visible')
+            addExp.classList.add('hidden')
+            expForm.classList.remove('visible')
+            expForm.classList.add('hidden')
+        }
         educationContainer.classList.remove('deets-hidden')
         educationDeets.classList.remove('hidden')
         educationDeets.classList.add('visible')
@@ -469,6 +518,9 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
         const educationContainer = document.querySelector('.education')
         const children = educationContainer.children
         educationContainer.classList.add('deets-hidden')
+        if (educationContainer.classList.contains('form-visible')) {
+            educationContainer.classList.remove('form-visible')
+        }
         for (const child of children) {
             if (child.classList.contains('visible')) {
                 child.classList.add('hidden')
@@ -513,20 +565,45 @@ function Summary({ summary, handleSummaryChange }) {
     function showSumDeets() {
         const infoForm = document.querySelector('.info-form')
         const summary = infoForm.querySelector('.summary')
-        const children = infoForm.children
-        for (let i = 3; i < children.length; i++) {
-            if (!children[i].classList.contains('deets-hidden')) {
-                children[i].classList.add('deets-hidden')
-            }
+        const sumForm = summary.querySelector('form')
+        const education = infoForm.querySelector('.education')
+        const experience = infoForm.querySelector('.experience')
+        if (!education.classList.contains('deets-hidden')) {
+            education.classList.add('deets-hidden')
+            const edDeets = education.querySelector('.education-deets')
+            const addEdu = education.querySelector('.add-edu')
+            const eduForm = education.querySelector('.education-form')
+            edDeets.classList.remove('visible')
+            edDeets.classList.add('hidden')
+            addEdu.classList.remove('visible')
+            addEdu.classList.add('hidden')
+            eduForm.classList.remove('visible')
+            eduForm.classList.add('hidden')
+        }
+        if (!experience.classList.contains('deets-hidden')) {
+            experience.classList.add('deets-hidden')
+            const expDeets = experience.querySelector('.experience-deets')
+            const addExp = experience.querySelector('.add-exp')
+            const expForm = experience.querySelector('.experience-form')
+            expDeets.classList.remove('visible')
+            expDeets.classList.add('hidden')
+            addExp.classList.remove('visible')
+            addExp.classList.add('hidden')
+            expForm.classList.remove('visible')
+            expForm.classList.add('hidden')
         }
         summary.classList.remove('deets-hidden')
+        sumForm.classList.add('visible')
         sumDeetsVisible = true
     }
 
     function hideSumDeets() {
         const infoForm = document.querySelector('.info-form')
         const summary = infoForm.querySelector('.summary')
+        const sumForm = summary.querySelector('form')
         summary.classList.add('deets-hidden')
+        sumForm.classList.remove('visible')
+        sumForm.classList.add('hidden')
         sumDeetsVisible = false
     }
 
