@@ -5,12 +5,11 @@
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     padding: 60px 20px 60px 20px;
-    border: 1px solid black;
 }
 
 .main-grid .info-form {
-    display: grid;
-    grid-template-rows: 250px 250px 0.2fr 0.2fr 0.2fr;
+    display: flex;
+    flex-direction: column;
     gap: 30px;
 }
 
