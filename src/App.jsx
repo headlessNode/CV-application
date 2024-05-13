@@ -1,15 +1,17 @@
-import { Children, useState } from 'react'
+import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import './App.css'
 
 function CvHeader({ name, email, number, address }) {
     return (
-        <div className="cv-header">
-            <h1>{name}</h1>
-            <div className="deets">
-                <p>
-                    {email} | {number} | {address}
-                </p>
+        <div className="cv-header-container">
+            <div className="cv-header">
+                <h1>{name}</h1>
+                <div className="deets">
+                    <p>
+                        {email} | {number} | {address}
+                    </p>
+                </div>
             </div>
         </div>
     )
@@ -26,40 +28,42 @@ function CvSkills({
     skillEight,
 }) {
     return (
-        <div className="skills">
-            <h2>Skills</h2>
-            <div className="cols">
-                <div className="col-one">
-                    <ul>
-                        <li>
-                            <p>{skillOne}</p>
-                        </li>
-                        <li>
-                            <p>{skillTwo}</p>
-                        </li>
-                        <li>
-                            <p>{skillThree}</p>
-                        </li>
-                        <li>
-                            <p>{skillFour}</p>
-                        </li>
-                    </ul>
-                </div>
-                <div className="col-two">
-                    <ul>
-                        <li>
-                            <p>{skillFive}</p>
-                        </li>
-                        <li>
-                            <p>{skillSix}</p>
-                        </li>
-                        <li>
-                            <p>{skillSeven}</p>
-                        </li>
-                        <li>
-                            <p>{skillEight}</p>
-                        </li>
-                    </ul>
+        <div className="skills-container">
+            <div className="skills">
+                <h2>Skills</h2>
+                <div className="cols">
+                    <div className="col-one">
+                        <ul>
+                            <li>
+                                <p>{skillOne}</p>
+                            </li>
+                            <li>
+                                <p>{skillTwo}</p>
+                            </li>
+                            <li>
+                                <p>{skillThree}</p>
+                            </li>
+                            <li>
+                                <p>{skillFour}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="col-two">
+                        <ul>
+                            <li>
+                                <p>{skillFive}</p>
+                            </li>
+                            <li>
+                                <p>{skillSix}</p>
+                            </li>
+                            <li>
+                                <p>{skillSeven}</p>
+                            </li>
+                            <li>
+                                <p>{skillEight}</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -68,54 +72,60 @@ function CvSkills({
 
 function CvSummary({ summary }) {
     return (
-        <div className="cv-summary">
-            <h2>Summary</h2>
-            <p>{summary}</p>
+        <div className="summary-container">
+            <div className="cv-summary">
+                <h2>Summary</h2>
+                <p>{summary}</p>
+            </div>
         </div>
     )
 }
 
 function CvEducation({ education }) {
     return (
-        <div className="cv-education">
-            <h2>Education</h2>
-            {education.map((ed) => {
-                return (
-                    <div className="ed-deets" key={uuidv4()}>
-                        <div className="col-one">
-                            <p className="duration">{`${ed.startDate} to ${ed.endDate}`}</p>
-                            <p className="location">{`${ed.city}`}</p>
+        <div className="edu-container">
+            <div className="cv-education">
+                <h2>Education</h2>
+                {education.map((ed) => {
+                    return (
+                        <div className="ed-deets" key={uuidv4()}>
+                            <div className="col-one">
+                                <p className="duration">{`${ed.startDate} to ${ed.endDate}`}</p>
+                                <p className="location">{`${ed.city}`}</p>
+                            </div>
+                            <div className="col-two">
+                                <h4 className="school">{`${ed.school}`}</h4>
+                                <p className="degree">{`${ed.degree}`}</p>
+                            </div>
                         </div>
-                        <div className="col-two">
-                            <h4 className="school">{`${ed.school}`}</h4>
-                            <p className="degree">{`${ed.degree}`}</p>
-                        </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
+            </div>
         </div>
     )
 }
 
 function CvExperience({ experience }) {
     return (
-        <div className="cv-experience">
-            <h2>Experience</h2>
-            {experience.map((exp) => {
-                return (
-                    <div className="exp-deets" key={uuidv4()}>
-                        <div className="col-one">
-                            <p className="duration">{`${exp.startDate} to ${exp.endDate}`}</p>
-                            <p className="location">{`${exp.city}`}</p>
+        <div className="exp-container">
+            <div className="cv-experience">
+                <h2>Experience</h2>
+                {experience.map((exp) => {
+                    return (
+                        <div className="exp-deets" key={uuidv4()}>
+                            <div className="col-one">
+                                <p className="duration">{`${exp.startDate} to ${exp.endDate}`}</p>
+                                <p className="location">{`${exp.city}`}</p>
+                            </div>
+                            <div className="col-two">
+                                <h4 className="org">{`${exp.org}`}</h4>
+                                <p className="position">{`${exp.position}`}</p>
+                                <p className="summary">{`${exp.summary}`}</p>
+                            </div>
                         </div>
-                        <div className="col-two">
-                            <h4 className="org">{`${exp.org}`}</h4>
-                            <p className="position">{`${exp.position}`}</p>
-                            <p className="summary">{`${exp.summary}`}</p>
-                        </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
+            </div>
         </div>
     )
 }
@@ -358,7 +368,7 @@ function Experience({
                 ))}
             </div>
             <div className="add-exp hidden">
-                <button onClick={showForm}>+ Experience</button>
+                <button onClick={showForm}>Add Experience</button>
             </div>
             <ExperienceForm handleAddExperience={handleAddExperience} />
         </div>
@@ -547,7 +557,7 @@ function Education({ education, handleAddEducation, handleDelelteEducation }) {
                 ))}
             </div>
             <div className="add-edu hidden">
-                <button onClick={showForm}>+ Education</button>
+                <button onClick={showForm}>Add Education</button>
             </div>
             <EducationForm handleAddEducation={handleAddEducation} />
         </div>
@@ -871,7 +881,7 @@ function MainGrid() {
     let [skillSeven, setSkillSeven] = useState('Python')
     let [skillEight, setSkillEight] = useState('Responsive Design')
     let [summary, setSummary] = useState(
-        'Brief paragraph on skills and expereince.'
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, cum veniam! Excepturi ullam debitis quo, repellat quaerat, facere corporis amet, ducimus explicabo in hic totam repellendus non exercitationem tempora eveniet!'
     )
     let [education, setEducation] = useState([
         {

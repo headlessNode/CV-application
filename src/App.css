@@ -19,8 +19,19 @@
     min-height: 120vh;
     width: 60%;
     min-width: 450px;
-    padding: 20px 40px 0 40px;
     background: var(--info-form-color);
+}
+
+.main-grid .cv .cv-header-container {
+    padding: 40px 40px;
+    background: var(--cv-header);
+}
+
+.main-grid .cv .skills-container,
+.main-grid .cv .summary-container,
+.main-grid .cv .edu-container,
+.main-grid .cv .exp-container {
+    padding: 0 40px;
 }
 
 .main-grid .cv .cv-header {
@@ -28,18 +39,20 @@
     justify-items: center;
     align-items: center;
     gap: 10px;
-    background: var(--cv-header);
     color: var(--info-form-color);
+    > h1 {
+        font-weight: 600;
+    }
 }
 
 .main-grid .cv .skills {
-    padding: 20px 0 20px 0;
     display: grid;
     gap: 10px;
     > h2 {
-        padding: 10px;
         background: var(--cv-accent);
         color: var(--cv-header);
+        text-align: center;
+        font-weight: 600;
     }
 }
 
@@ -53,9 +66,10 @@
     gap: 10px;
     padding: 20px 0 20px 0;
     > h2 {
-        padding: 10px;
         background: var(--cv-accent);
         color: var(--cv-header);
+        text-align: center;
+        font-weight: 600;
     }
 }
 
@@ -65,9 +79,10 @@
     gap: 10px;
     padding: 20px 0 20px 0;
     > h2 {
-        padding: 10px;
         background: var(--cv-accent);
         color: var(--cv-header);
+        text-align: center;
+        font-weight: 600;
     }
 }
 
@@ -272,7 +287,8 @@
         padding: 15px 25px 15px 25px;
         border: none;
         border-radius: 15px;
-        background: var(--main-bg-color);
+        background: #187ff5;
+        color: #fff;
     }
 }
 
