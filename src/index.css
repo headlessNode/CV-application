@@ -7,6 +7,8 @@
     font-style: normal;
     --main-bg-color: #f3f4f6;
     --info-form-color: #fff;
+    --cv-header: #2878ab;
+    --cv-accent: #e9faf9;
 }
 
 body {
