@@ -7,15 +7,9 @@ function CvHeader({ name, email, number, address }) {
         <div className="cv-header">
             <h1>{name}</h1>
             <div className="deets">
-                <div className="email">
-                    <p>{email}</p>
-                </div>
-                <div className="number">
-                    <p>{number}</p>
-                </div>
-                <div className="address">
-                    <p>{address}</p>
-                </div>
+                <p>
+                    {email} | {number} | {address}
+                </p>
             </div>
         </div>
     )
@@ -33,37 +27,40 @@ function CvSkills({
 }) {
     return (
         <div className="skills">
-            <div className="col-one">
-                <ul>
-                    <li>
-                        <p>{skillOne}</p>
-                    </li>
-                    <li>
-                        <p>{skillTwo}</p>
-                    </li>
-                    <li>
-                        <p>{skillThree}</p>
-                    </li>
-                    <li>
-                        <p>{skillFour}</p>
-                    </li>
-                </ul>
-            </div>
-            <div className="col-two">
-                <ul>
-                    <li>
-                        <p>{skillFive}</p>
-                    </li>
-                    <li>
-                        <p>{skillSix}</p>
-                    </li>
-                    <li>
-                        <p>{skillSeven}</p>
-                    </li>
-                    <li>
-                        <p>{skillEight}</p>
-                    </li>
-                </ul>
+            <h2>Skills</h2>
+            <div className="cols">
+                <div className="col-one">
+                    <ul>
+                        <li>
+                            <p>{skillOne}</p>
+                        </li>
+                        <li>
+                            <p>{skillTwo}</p>
+                        </li>
+                        <li>
+                            <p>{skillThree}</p>
+                        </li>
+                        <li>
+                            <p>{skillFour}</p>
+                        </li>
+                    </ul>
+                </div>
+                <div className="col-two">
+                    <ul>
+                        <li>
+                            <p>{skillFive}</p>
+                        </li>
+                        <li>
+                            <p>{skillSix}</p>
+                        </li>
+                        <li>
+                            <p>{skillSeven}</p>
+                        </li>
+                        <li>
+                            <p>{skillEight}</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     )
@@ -85,13 +82,13 @@ function CvEducation({ education }) {
             {education.map((ed) => {
                 return (
                     <div className="ed-deets" key={uuidv4()}>
-                        <div className="date-loc">
-                            <p>{`${ed.startDate} to ${ed.endDate}`}</p>
-                            <p>{`${ed.city}`}</p>
+                        <div className="col-one">
+                            <p className="duration">{`${ed.startDate} to ${ed.endDate}`}</p>
+                            <p className="location">{`${ed.city}`}</p>
                         </div>
-                        <div className="school">
-                            <h4>{`${ed.school}`}</h4>
-                            <p>{`${ed.degree}`}</p>
+                        <div className="col-two">
+                            <h4 className="school">{`${ed.school}`}</h4>
+                            <p className="degree">{`${ed.degree}`}</p>
                         </div>
                     </div>
                 )
@@ -102,21 +99,19 @@ function CvEducation({ education }) {
 
 function CvExperience({ experience }) {
     return (
-        <div className="cv-expereince">
+        <div className="cv-experience">
             <h2>Experience</h2>
             {experience.map((exp) => {
                 return (
                     <div className="exp-deets" key={uuidv4()}>
-                        <div className="date-loc">
-                            <p>{`${exp.startDate} to ${exp.endDate}`}</p>
-                            <p>{`${exp.city}`}</p>
+                        <div className="col-one">
+                            <p className="duration">{`${exp.startDate} to ${exp.endDate}`}</p>
+                            <p className="location">{`${exp.city}`}</p>
                         </div>
-                        <div className="org">
-                            <h4>{`${exp.org}`}</h4>
-                            <p>{`${exp.position}`}</p>
-                        </div>
-                        <div className="exp-summary">
-                            <p>{`${exp.summary}`}</p>
+                        <div className="col-two">
+                            <h4 className="org">{`${exp.org}`}</h4>
+                            <p className="position">{`${exp.position}`}</p>
+                            <p className="summary">{`${exp.summary}`}</p>
                         </div>
                     </div>
                 )

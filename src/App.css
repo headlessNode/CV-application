@@ -1,13 +1,16 @@
 .main-grid {
     max-width: 1200px;
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    display: flex;
+    /* flex-wrap: wrap; */
     gap: 20px;
-    padding: 60px 20px 60px 20px;
+    padding: 20px 20px 0 20px;
 }
 
 .main-grid .info-form {
+    max-width: 500px;
+    min-width: 400px;
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -15,6 +18,73 @@
 
 .main-grid .cv {
     min-height: 120vh;
+    width: 60%;
+    min-width: 450px;
+    padding: 20px 40px 0 40px;
+    background: var(--info-form-color);
+}
+
+.main-grid .cv .cv-header {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-grid .cv .skills {
+    padding: 20px 0 20px 0;
+    display: grid;
+    gap: 10px;
+    > h2 {
+        padding: 10px;
+        background: #187ff5;
+    }
+}
+
+.main-grid .cv .skills .cols {
+    display: flex;
+    justify-content: space-around;
+}
+
+.main-grid .cv .cv-summary {
+    display: grid;
+    gap: 10px;
+    padding: 20px 0 20px 0;
+    > h2 {
+        padding: 10px;
+        background: #187ff5;
+    }
+}
+
+.main-grid .cv .cv-education,
+.main-grid .cv .cv-experience {
+    display: grid;
+    gap: 10px;
+    padding: 20px 0 20px 0;
+    > h2 {
+        padding: 10px;
+        background: #187ff5;
+    }
+}
+
+.main-grid .cv .cv-education .ed-deets {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 10px;
+}
+
+.main-grid .cv .cv-experience .exp-deets {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 10px;
+    > p {
+        padding: 5px 0 5px 0;
+    }
+}
+
+.main-grid .cv .cv-experience .exp-deets .summary {
+    grid-row: 3/4;
+    grid-column: 2/3;
 }
 
 .main-grid .info-form .personal-deets {
